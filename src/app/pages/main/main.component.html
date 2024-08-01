@@ -1,0 +1,41 @@
+<section>
+  <h3>Pokemon</h3>
+  <mat-button-toggle-group
+    name="pokemon-types"
+    aria-label="pokemon-types"
+    multiple
+    (change)="filterPokemonByType($event)"
+  >
+    <mat-button-toggle *ngFor="let type of pokemonTypes" [value]="type" [checked]="isFilteredType(type)">
+      {{ type }}
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+<section>
+  <mat-grid-list cols="6">
+    <ng-container *ngFor="let pokemon of pokemonList">
+    <mat-grid-tile (click)="pokemonDetails(pokemon)" *ngIf="hasType(pokemon)">
+      <mat-card class="cursor-pointer">
+        <mat-card-header class="text-center">
+          <mat-card-title class="width-100">{{ pokemon.name }}</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image [src]="pokemon?.sprites?.front_default" [alt]="pokemon.name">
+        <mat-card-content>
+          <div>
+            <strong>Types: </strong>
+            <span *ngFor="let type of pokemon.types; let isLast=last">{{ type.type.name }}{{isLast ? '' : ', '}}</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    </ng-container>
+  </mat-grid-list>
+  <mat-paginator
+    [length]="(pokemonList$ | async)?.count"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizes"
+    (page)="onPageChange($event)"
+  >
+  </mat-paginator>
+</section>
+

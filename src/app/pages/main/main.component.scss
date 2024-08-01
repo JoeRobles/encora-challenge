@@ -1,0 +1,12 @@
+.text-center {
+  text-align: center;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+::ng-deep {
+  .mat-mdc-card-header-text {
+    width: 100%;
+    text-transform: capitalize;
+  }
+}

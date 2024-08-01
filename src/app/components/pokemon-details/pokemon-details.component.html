@@ -1,0 +1,35 @@
+<ng-container *ngIf="pokemonDetail">
+  <div>
+    <div class="container">
+      <div class="text-center">
+        <div>{{ pokemonDetail.name }}</div>
+      </div>
+      <div class="text-center">
+        <img mat-card-image [src]="pokemonDetail.sprites.other['official-artwork'].front_default" [alt]="pokemonDetail.name">
+      </div>
+      <div>
+        <div>
+          <strong>Types: </strong>
+          <span *ngFor="let type of pokemonDetail.types; let isLast=last">{{ type.type.name }}{{isLast ? '' : ', '}}</span>
+        </div>
+        <div>
+          <strong>Abilities: </strong>
+          <span *ngFor="let type of pokemonDetail.abilities; let isLast=last">{{ type.ability.name }}{{isLast ? '' : ', '}}</span>
+        </div>
+        <div>
+          <strong>Height: </strong>
+          <span>{{ pokemonDetail.height }}</span>
+        </div>
+        <div>
+          <strong>Weight: </strong>
+          <span>{{ pokemonDetail.weight }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<audio class="hidden"
+       [src]="pokemonDetail.cries.latest"
+       controls
+       preload="auto"
+       [autoplay]="true"></audio>
